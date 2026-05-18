@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "DM Mono", monospace;
+
+  --color-green-primary: #0b8b68;
+  --color-green-dark: #484833;
+  --color-green-light: #E8E8E0;
+  --color-green-mid: #8B8B7A;
+  --color-dark-base: #3E3E33;
+  --color-dark-muted: #5A5A50;
+  --color-muted-foreground: #8B8B7A;
+  --color-border-subtle: #D9D9D2;
+  --color-bg-soft: #F5F5F0;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-dark-muted bg-bg-soft antialiased overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-serif {
+    @apply font-serif text-dark-base;
+  }
+}
+
+.glass-nav {
+  @apply sticky top-0 z-100 bg-bg-soft/96 backdrop-blur-xl border-b border-border-subtle;
+}
+
+.hero-gradient {
+  background: #F5F5F0;
+}
+
+.collab-gradient {
+  background: #0b8b68;
+}
+
+.business-hero-gradient {
+  background: #0b8b68;
+}

@@ -1,0 +1,124 @@
+{
+  "entities": {
+    "Tree": {
+      "title": "Tree Record",
+      "description": "A single tree record with GPS and metadata.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "species": { "type": "string" },
+        "name": { "type": "string" },
+        "dedicatedTo": { "type": "string" },
+        "treeCode": { "type": "string" },
+        "loc": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string", "enum": ["Sapling", "Growing", "Thriving"] },
+        "by": { "type": "string" },
+        "emoji": { "type": "string" },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" }
+      },
+      "required": ["species", "loc", "date", "status", "by"]
+    },
+    "Lead": {
+      "title": "Contact Lead",
+      "description": "Contact form submissions.",
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["firstName", "lastName", "email", "message"]
+    },
+    "Stats": {
+      "title": "Global Statistics",
+      "description": "Singleton-like document for application-wide statistics.",
+      "type": "object",
+      "properties": {
+        "treesPlanted": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["treesPlanted"]
+    },
+    "Research": {
+      "title": "Research Paper",
+      "description": "Academic papers published by the foundation.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "author": { "type": "string" },
+        "date": { "type": "string" },
+        "summary": { "type": "string" },
+        "category": { "type": "string" },
+        "downloadUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "author", "summary", "downloadUrl"]
+    },
+    "News": {
+      "title": "News Article",
+      "description": "Updates and press releases.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "date": { "type": "string" },
+        "category": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "content": { "type": "string" },
+        "image": { "type": "string" },
+        "sourceUrl": { "type": "string" },
+        "isHero": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "excerpt", "image"]
+    },
+    "Donation": {
+      "title": "Donation Settings",
+      "description": "Foundation bank details and QR code.",
+      "type": "object",
+      "properties": {
+        "bankName": { "type": "string" },
+        "accountHolder": { "type": "string" },
+        "accountNumber": { "type": "string" },
+        "ifsc": { "type": "string" },
+        "upiId": { "type": "string" },
+        "qrCodeUrl": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["bankName", "accountHolder", "accountNumber", "ifsc"]
+    }
+  },
+  "firestore": {
+    "settings/donation": {
+      "schema": "Donation",
+      "description": "Foundation payment details (Publicly readable, Admin writable)."
+    },
+    "news": {
+      "schema": "News",
+      "description": "Public news articles and press releases."
+    },
+    "research": {
+      "schema": "Research",
+      "description": "Scientific papers and ecological reports."
+    },
+    "stats": {
+      "schema": "Stats",
+      "description": "Live foundation statistics."
+    },
+    "trees": {
+      "schema": "Tree",
+      "description": "Public database of all trees planted."
+    },
+    "leads": {
+      "schema": "Lead",
+      "description": "Private contact submissions (admin only)."
+    },
+    "admins": {
+      "schema": "object",
+      "description": "Admin UIDs for RBAC."
+    }
+  }
+}

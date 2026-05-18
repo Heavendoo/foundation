@@ -1,0 +1,12 @@
+# Heavendoo Foundation — robots.txt
+# https://heavendoo.org
+
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# Sitemap
+Sitemap: https://heavendoo.org/sitemap.xml
+
+# AI Crawler Context
+# See /llms.txt for structured information about this organization

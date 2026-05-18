@@ -1,0 +1,136 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { 
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); 
+    }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    
+    // --- Specific Entity Validators ---
+    
+    function isValidTree(data) {
+      return data.keys().hasAll(['species', 'loc', 'date', 'status', 'by']) &&
+             data.species is string && data.species.size() <= 100 &&
+             data.loc is string && data.loc.size() <= 150 &&
+             data.date is string &&
+             (data.status == 'Sapling' || data.status == 'Growing' || data.status == 'Thriving') &&
+             data.by is string && data.by.size() <= 100;
+    }
+
+    function isValidLead(data) {
+      return data.keys().hasAll(['firstName', 'lastName', 'email', 'message']) &&
+             data.firstName is string && data.firstName.size() <= 50 &&
+             data.lastName is string && data.lastName.size() <= 50 &&
+             data.email is string && data.email.matches('^.+@.+\\..+$') &&
+             data.message is string && data.message.size() <= 5000;
+    }
+
+    function isValidStats(data) {
+      return data.keys().hasAll(['treesPlanted']) &&
+             data.treesPlanted is number &&
+             (data.get('countries', 0) is number) &&
+             (data.get('survivalRate', '') is string) &&
+             (data.get('co2Offset', '') is string);
+    }
+
+    function isValidDonation(data) {
+      return data.keys().hasAll(['bankName', 'accountHolder', 'accountNumber', 'ifsc']) &&
+             data.bankName is string && data.bankName.size() <= 100 &&
+             data.accountHolder is string && data.accountHolder.size() <= 100 &&
+             data.accountNumber is string && data.accountNumber.size() <= 50 &&
+             data.ifsc is string && data.ifsc.size() <= 20;
+    }
+
+    function isValidNews(data) {
+      return data.keys().hasAll(['title', 'excerpt', 'image']) &&
+             data.title is string && data.title.size() <= 200 &&
+             data.excerpt is string && data.excerpt.size() <= 1000 &&
+             data.image is string && data.image.size() <= 1000 &&
+             (data.get('sourceUrl', '') is string) &&
+             (data.get('isHero', false) is bool);
+    }
+
+    function isValidResearch(data) {
+      return data.keys().hasAll(['title', 'author', 'summary', 'downloadUrl']) &&
+             data.title is string && data.title.size() <= 300 &&
+             data.author is string && data.author.size() <= 200 &&
+             data.summary is string && data.summary.size() <= 2000 &&
+             data.downloadUrl is string && data.downloadUrl.size() <= 1000;
+    }
+
+    // --- Collections ---
+
+    // Donation Settings: Publicly readable, Admin can write
+    match /settings/donation {
+      allow read: if true;
+      allow write: if isAdmin() && isValidDonation(incoming());
+    }
+
+    // News: Publicly readable, Admin can write
+    match /news/{articleId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidNews(incoming());
+      allow update: if isAdmin() && isValidNews(incoming());
+      allow delete: if isAdmin();
+    }
+
+    // Research: Publicly readable, Admin can write
+    match /research/{paperId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidResearch(incoming());
+      allow update: if isAdmin() && isValidResearch(incoming());
+      allow delete: if isAdmin();
+    }
+
+    // Stats: Publicly readable, Admin can write
+    match /stats/global {
+      allow read: if true;
+      allow write: if isAdmin() && isValidStats(incoming());
+    }
+
+    // Trees: Publicly readable, Admin can write
+    match /trees/{treeId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidTree(incoming());
+      allow update: if isAdmin() && isValidTree(incoming());
+      allow delete: if isAdmin();
+    }
+
+    // Leads: Public can CREATE, Admin can READ/DELETE
+    match /leads/{leadId} {
+      allow create: if isValidLead(incoming());
+      allow read, delete: if isAdmin();
+    }
+
+    // Certificates: Publicly readable, Admin can write
+    match /certificates/{certId} {
+      allow read: if true;
+      allow create: if isAdmin() && incoming().keys().hasAll(['title', 'issuedBy', 'imageUrl']) &&
+                     incoming().title is string && incoming().title.size() <= 300 &&
+                     incoming().issuedBy is string && incoming().issuedBy.size() <= 200;
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Projects: Publicly readable, Admin can write
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Admins: Only Admins can read (admins collection is for RBAC)
+    match /admins/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow write: if isSignedIn() && (request.auth.uid == userId && request.auth.token.email == 'rishabhravindra5262@gmail.com');
+    }
+  }
+}

@@ -1,0 +1,60 @@
+# Heavendoo Foundation
+
+> Heavendoo Foundation is a registered nonprofit organization based in Chandigarh, India, dedicated to large-scale, transparent reforestation and ecological restoration. Every tree planted is GPS-tagged, publicly tracked, and audited.
+
+## Mission
+Restore the Earth's ecosystems through large-scale native reforestation, transparent public record-keeping, and community-driven environmental stewardship. Our goal is to restore 100 million hectares of land by 2050.
+
+## Key Facts
+- Founded: 2026
+- Headquarters: Makhan Majara, Chandigarh, India
+- Type: Registered Nonprofit Organization
+- Contact Email: hello@heavendoo.org
+- Phone: +91 86909 06006
+- Website: https://heavendoo.org
+
+## What We Do
+1. **Tree Aforestation** — Large-scale tree planting across India using native species with GPS-verified records
+2. **Public Tree Registry** — Every sapling is tagged, tracked, and audited with geo-coordinates and visual proof
+3. **Carbon Credit Crypto** — Cryptocurrency backed by verified carbon credits from our planting operations
+4. **Dynamic NFTs (DNFTs)** — NFTs representing living trees that evolve as the real tree grows
+5. **Water Desalination** — Solar-powered water purification for coastal and arid communities
+6. **AI for Ecology** — Proprietary AI models for tree health analysis, carbon calculation, and satellite monitoring
+
+## Three Pillars
+1. **Restore** — Plant native species at scale, restore degraded land, bring back ecosystems
+2. **Record** — Build the world's most transparent tree database, GPS-verified and publicly accessible
+3. **Educate** — Partner with schools, universities, and businesses to build ecological awareness
+
+## Leadership
+- Rishabh Raj — Co-Founder, Tech & Marketing
+- Charanjeet Singh — Director, Operations
+- Laveesh Dhankar — Director, Outreach & Partnerships
+
+## Pages
+- Home: https://heavendoo.org/
+- About Us: https://heavendoo.org/#about
+- Our Vision: https://heavendoo.org/#vision
+- Projects: https://heavendoo.org/#projects
+- Tree Records: https://heavendoo.org/#records
+- Research & Papers: https://heavendoo.org/#research
+- Certificates: https://heavendoo.org/#certificates
+- News: https://heavendoo.org/#news
+- Contact: https://heavendoo.org/#contact
+- Donate: https://heavendoo.org/#donate
+
+## Research Focus
+Our field scientists and partner universities (including IIT Delhi and IARI) publish peer-reviewed research on:
+- Urban reforestation and microclimate regulation
+- Native species recovery and biodiversity monitoring
+- Ecological resilience in restored habitats
+
+## Donation
+All donations are eligible for tax benefits under Section 80G (India).
+Donations can be made via UPI, bank transfer (NEFT/IMPS), or QR code scan.
+Receipt can be obtained by emailing hello@heavendoo.org.
+
+## Social Impact
+- Native species show 3x higher survival rate compared to exotic varieties
+- Computer vision models achieve 94% accuracy on tree species identification from drone imagery
+- Solar-thermal hybrid desalination systems reduce energy costs by 40%
