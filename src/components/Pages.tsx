@@ -104,9 +104,9 @@ export const About = () => (
       </div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
         {[
-          { name: 'Rishabh Raj', role: 'Director, Tech & Marketing', initials: 'RR', color: 'bg-bg-soft text-dark-base' },
+          { name: 'Rishabh Raj', role: 'Director,Marketing & Fund Raising', initials: 'RR', color: 'bg-bg-soft text-dark-base' },
           { name: 'Charanjeet Singh', role: 'Director, Operations', initials: 'CS', color: 'bg-bg-soft text-dark-base' },
-          { name: 'Tushar Sharma ', role: 'Director, Publich Relation ', initials: 'TS', color: 'bg-bg-soft text-dark-base' },
+          { name: 'Tushar Sharma ', role: 'Director, Publich Relation & Tech', initials: 'TS', color: 'bg-bg-soft text-dark-base' },
           { name: 'Sanyam Poonia', role: 'Director, Outreach & Partnerships', initials: 'SP', color: 'bg-bg-soft text-dark-base' },
 
         ].map((m, i) => (
